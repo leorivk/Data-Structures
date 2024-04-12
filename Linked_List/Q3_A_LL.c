@@ -97,12 +97,20 @@ void moveOddItemsToBack(LinkedList *ll)
 	}
 
 	for (int i = 0; i < ll->size; i++) {
-		if (cur->item % 2 != 0) {
-			prev->next = cur->next; 
-			tail->next = cur; 
-			cur->next = NULL; 
-			tail = cur; 
-			cur = prev->next;
+		if (cur->item % 2 != 0) { 
+            if (cur == ll->head) { 
+                ll->head = cur->next;  
+                tail->next = cur;  
+                cur->next = NULL; 
+                tail = cur; 
+                cur = ll->head;  
+            } else {
+                prev->next = cur->next;  
+                tail->next = cur;  
+                cur->next = NULL; 
+                tail = cur; 
+                cur = prev->next;  
+            }
 		} else {
 			prev = cur;
 			cur = cur->next;
