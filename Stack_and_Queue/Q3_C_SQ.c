@@ -110,8 +110,7 @@ int isStackPairwiseConsecutive(Stack *s)
     while (s->ll.size > 0) {
         int pop1 = pop(s); 
         int pop2 = pop(s);
-
-        if (abs(pop1 - pop2) != 1) {  
+        if (pop2 - pop1 != 1) {  
             return 0;
         }
     }
