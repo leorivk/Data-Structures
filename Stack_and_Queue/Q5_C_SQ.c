@@ -109,9 +109,8 @@ int main()
 
 void recursiveReverse(Queue *q)
 {
-	if (q->ll.head == NULL) {
-        return;
-    }
+	if (q->ll.head == NULL) return;
+    
 	int popped = dequeue(q);
 	recursiveReverse(q);
 	enqueue(q, popped);
