@@ -102,10 +102,32 @@ int main()
 }
 
 ////////////////////////////////////////////////////////////
-int balanced(char *expression)
-{
-/* add your code here */
+int balanced(char *expression) {
+	// 스택 초기화
+    Stack s; 
+    s.ll.head = NULL;  
+    s.ll.size = 0;  
+
+    for (int i = 0; expression[i]; i++) {
+        char c = expression[i];
+        if (c == '(' || c == '{' || c == '[') {
+            push(&s, c);
+        } else if (c == ')' || c == '}' || c == ']') {
+            if (isEmptyStack(&s)) {
+                return 1; 
+            }
+            char popped = pop(&s);
+            if ((c == ')' && popped != '(') ||
+                (c == '}' && popped != '{') ||
+                (c == ']' && popped != '[')) {
+                return 1; 
+            }
+        }
+    }
+
+    return isEmptyStack(&s) ? 0 : 1; 
 }
+
 
 ////////////////////////////////////////////////////////////
 
