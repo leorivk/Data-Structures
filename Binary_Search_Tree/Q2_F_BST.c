@@ -88,9 +88,30 @@ int main()
 
 //////////////////////////////////////////////////////////////////////////////////
 
-void inOrderTraversal(BSTNode *root)
-{
-	 /* add your code here */
+void inOrderTraversal(BSTNode *root) {
+    if (root == NULL) return;
+
+    Stack *s = (Stack *)malloc(sizeof(Stack));
+    if (s == NULL) {
+        printf("메모리 할당 실패\n");
+        return;
+    }
+    s->top = NULL;
+
+    BSTNode *current = root;
+    while (current != NULL || !isEmpty(s)) {
+        while (current != NULL) {
+            push(s, current);
+            current = current->left;
+        }
+
+        current = pop(s);
+        printf("%d ", current->item);
+
+        current = current->right;
+    }
+
+    free(s);
 }
 
 ///////////////////////////////////////////////////////////////////////////////
