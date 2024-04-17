@@ -90,11 +90,37 @@ int main()
 }
 
 //////////////////////////////////////////////////////////////////////////////////
-
 void levelOrderTraversal(BSTNode* root)
 {
+	if (root == NULL) return;
 
-    /* add your code here */
+	Queue* q = (Queue*)malloc(sizeof(Queue));
+	if (q == NULL) {
+		printf("메모리 할당 실패\n");
+		return;
+	}
+
+	// 초기화
+	q->head = NULL;
+    q->tail = NULL;
+
+	QueueNode *qhead = q->head, *qtail = q->tail;
+
+	enqueue(&qhead, &qtail, root);
+	
+    while (!isEmpty(qhead)) {
+        BSTNode *current = dequeue(&qhead, &qtail);
+        printf("%d ", current->item);
+
+        if (current->left != NULL) {
+            enqueue(&qhead, &qtail, current->left);
+        }
+        if (current->right != NULL) {
+            enqueue(&qhead, &qtail, current->right);
+        }
+    }
+    free(q); 
+
 }
 
 ///////////////////////////////////////////////////////////////////////////////

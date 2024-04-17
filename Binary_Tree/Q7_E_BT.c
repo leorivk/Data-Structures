@@ -103,12 +103,12 @@ int main()
 int smallestValue(BTNode *node)
 {
     if (node == NULL) {
-        return 2147483647; 
+        return __INT32_MAX__; 
     }
 
     int left = smallestValue(node->left);
     int right = smallestValue(node->right);
-
+    
     if (node->item < left && node->item < right) {
         return node->item;
     } else if (left < right) {
